@@ -1,0 +1,1011 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Large\_Scale\_Structure\_of\_the\_Universe}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{\texorpdfstring{\textbf{Our Vast Universe Probed with Big
+Data}}{Our Vast Universe Probed with Big Data}}\label{our-vast-universe-probed-with-big-data}
+
+\paragraph{\texorpdfstring{Written by Stephanie Juneau, NOAO
+(\url{mailto:sjuneau@noao.edu}), with contributions from Leah Fulmer \&
+Gautham
+Narayan}{Written by Stephanie Juneau, NOAO (mailto:sjuneau@noao.edu), with contributions from Leah Fulmer \& Gautham Narayan}}\label{written-by-stephanie-juneau-noao-mailtosjuneaunoao.edu-with-contributions-from-leah-fulmer-gautham-narayan}
+
+Last updated on 10/12/2018
+
+ This notebook is interactive, and we will use it to learn and explore
+the distribution of galaxies in the universe. We follow a similar
+approach as other notebooks you might have used, in particular the one
+written by Gautham Narayan.
+
+Feel comfortable to ask questions as you go along!
+
+    \subsection{BEGIN HERE: How to use this
+notebook}\label{begin-here-how-to-use-this-notebook}
+
+The webpage you are in is actually an app - much like you'd run on your
+cellphone. This app consists of cells.
+
+Each "input" cell (something with an "In" to the left) contains code -
+instructions to make the computer do something.
+
+To activate or select a cell, you first need to click on it.
+
+You \textbf{execute a cell with Shift+Enter} on the keyboard - this
+makes the computer execute your instructions. That's what this app does!
+
+You can \textbf{modify the code by typing into the cell} and then
+execute again the new code with Shift+Enter.
+
+You can try it for yourself at https://try.jupyter.org/
+
+    \section{Activity 1: How Far Away are
+Galaxies?}\label{activity-1-how-far-away-are-galaxies}
+
+    In this activity, you will learn how astronomers measure distances to
+galaxies. You will get to compare galaxies to figure out which ones are
+closer or further away from us. You can then use this method for many
+more galaxies on your own as well!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Ignore this stuff \PYZhy{} it is to setup the plotting environment in your browser}
+        \PY{c+c1}{\PYZsh{} Just hit Shift + Enter here, and move on}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} notebook
+        \PY{o}{\PYZpc{}}\PY{k}{pylab}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{path} \PY{k}{as} \PY{n+nn}{mpath}
+        \PY{k+kn}{from} \PY{n+nn}{astroML}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k}{import} \PY{n}{fetch\PYZus{}sdss\PYZus{}spectrum}\PY{p}{,} \PY{n}{fetch\PYZus{}vega\PYZus{}spectrum}\PY{p}{,} \PY{n}{fetch\PYZus{}sdss\PYZus{}S82standards}
+        \PY{k+kn}{from} \PY{n+nn}{astroML}\PY{n+nn}{.}\PY{n+nn}{plotting} \PY{k}{import} \PY{n}{MultiAxes}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image}\PY{p}{,} \PY{n}{display}
+\end{Verbatim}
+
+
+    As in the first notebook, we are going to use data from the
+\textbf{Sloan Digital Sky Survey (SDSS)}. This project used a telescope
+at Apache Point in New Mexico to look at the northern sky.
+
+The Sloan Telescope at Apache Point, New Mexico. Image Credit: SDSS
+Team, Fermilab Visual Media Services.
+
+The Sloan survey team found millions of stars and galaxies, and made
+their big data set public. In this activity, we will retrieve and
+examine galaxy data!
+
+So how did Sloan take spectra of millions of stars and galaxies? The
+team used metal plates like the one shown below, with a hundreds of
+holes aligned with the stars and galaxies to be observed. An optical
+fiber is placed in each hole in order to transfer the light to the
+instrument and camera. As you will see below, the data are identified by
+their Plate number, their Fiber number, and the date when they were
+obtained - the MJD (Modified Julian Date).
+
+Holes in aluminum plates let the light from stars and galaxies passed to
+an optical fiber to the instrument. Image credit: D. Long, SDSS-III
+
+David Schlegel, Principal Investigator of the BOSS survey (follow-up to
+SDSS), holding one fiber plug plate.
+
+There were thousands of plates used (\textasciitilde{}2500 for SDSS),
+each with 640 fibers, which together gives 1.6 million spectra
+(including galaxies, stars, and extra spectra on blank sky).
+
+    \subsection{Step 1.1: Plot a Reference
+Spectrum}\label{step-1.1-plot-a-reference-spectrum}
+
+A reference spectrum means that it is at redshift zero (not moving
+toward or away from us). In this case, the reference spectrum is that of
+a single star.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Fetch single spectrum \PYZhy{} Enter the same \PYZdq{}Plate\PYZdq{}, \PYZdq{}MJD\PYZdq{} and \PYZdq{}Fiber\PYZdq{} numbers here}
+        \PY{c+c1}{\PYZsh{} Then hit Shift+Enter}
+        \PY{n}{plate} \PY{o}{=} \PY{l+m+mi}{396}
+        \PY{n}{mjd} \PY{o}{=} \PY{l+m+mi}{51816}
+        \PY{n}{fiber} \PY{o}{=} \PY{l+m+mi}{605}
+        \PY{n}{spec} \PY{o}{=} \PY{n}{fetch\PYZus{}sdss\PYZus{}spectrum}\PY{p}{(}\PY{n}{plate}\PY{p}{,} \PY{n}{mjd}\PY{p}{,} \PY{n}{fiber}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} now, we can plot the reference spectrum (at redshift=0)}
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{spec}\PY{o}{.}\PY{n}{wavelength}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{/}\PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Reference Spectrum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{3800}\PY{p}{,}\PY{l+m+mi}{6000}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wavelength}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brightness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Step 1.2: Plot a Galaxy
+Spectrum}\label{step-1.2-plot-a-galaxy-spectrum}
+
+Here, you will plot the spectrum of a galaxy. Notice if there are
+similarities and differences in its shape and lines relative to the
+reference spectrum.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Fetch the first galaxy spectrum}
+        \PY{c+c1}{\PYZsh{} Then hit Shift+Enter}
+        \PY{n}{plate} \PY{o}{=} \PY{l+m+mi}{2434}
+        \PY{n}{mjd} \PY{o}{=} \PY{l+m+mi}{53826}
+        \PY{n}{fiber} \PY{o}{=} \PY{l+m+mi}{359}
+        \PY{n}{spec1} \PY{o}{=} \PY{n}{fetch\PYZus{}sdss\PYZus{}spectrum}\PY{p}{(}\PY{n}{plate}\PY{p}{,} \PY{n}{mjd}\PY{p}{,} \PY{n}{fiber}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} now, we can plot the reference spectrum (at redshift=0)}
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{spec1}\PY{o}{.}\PY{n}{wavelength}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{spec1}\PY{o}{.}\PY{n}{spectrum}\PY{o}{/}\PY{l+m+mf}{40.}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Galaxy A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wavelength}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brightness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{3800}\PY{p}{,}\PY{l+m+mi}{6000}\PY{p}{)}
+        \PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{1.2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Questions}\label{questions}
+
+Do you notice differences between the shapes two spectra?
+
+Do you notice similar patterns in the line features (dips)?
+
+    \subsection{Step 1.3: Measure
+Redshifts}\label{step-1.3-measure-redshifts}
+
+The next step here is to overlay a reference spectrum (called a
+template) onto the galaxy spectra from above.
+
+\paragraph{Reminder: a galaxy is a collection of billion of stars, so
+the shape of the spectrum is not identical to the reference spectrum of
+a single star. But because the stars have the same elements, notice
+similar "dips" in the
+spectra.}\label{reminder-a-galaxy-is-a-collection-of-billion-of-stars-so-the-shape-of-the-spectrum-is-not-identical-to-the-reference-spectrum-of-a-single-star.-but-because-the-stars-have-the-same-elements-notice-similar-dips-in-the-spectra.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} redshift value (0 for a star, and upward for distant galaxies e.g.: }
+        \PY{c+c1}{\PYZsh{} z = 0.01, 0.02, 0.05, ... 0.1, 0.2, ... 1.0)}
+        \PY{c+c1}{\PYZsh{} First run this cell with zero redshift, and then adjust the value.}
+        \PY{n}{z1} \PY{o}{=} \PY{l+m+mf}{0.}
+        
+        \PY{c+c1}{\PYZsh{} now, we can plot the reference spectrum (at redshift=0)}
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{spec1}\PY{o}{.}\PY{n}{wavelength}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{spec1}\PY{o}{.}\PY{n}{spectrum}\PY{o}{/}\PY{l+m+mf}{45.}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{spec}\PY{o}{.}\PY{n}{wavelength}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{1.}\PY{o}{+}\PY{n}{z1}\PY{p}{)}\PY{p}{,} \PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{/}\PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Galaxy A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wavelength}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brightness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{3800}\PY{p}{,}\PY{l+m+mi}{6000}\PY{p}{)}
+        \PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{1.2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Question:}\label{question}
+
+Do you notice how the galaxy spectrum is shifted with respect to the
+reference spectrum?
+
+This is what we saw as the "redshift" due to the expansion of the
+universe, which causes galaxies to appear to recede away from us.
+
+    \section{MYSTERY Galaxy}\label{mystery-galaxy}
+
+Each group will receive the information to fetch a different spectrum of
+a mystery galaxy. This information will be on a piece of paper and
+contains PLATE, MJD, FIBER and NORM numbers. Enter these numbers in the
+cell below to measure the redshift (like you did above) for a new
+galaxy. If you do not get a piece of paper, simply use the numbers that
+are pre-entered below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Now we do it again for a NEW galaxy!}
+        
+        \PY{c+c1}{\PYZsh{} Replace the plate, mjd, fiber and norm with the numbers you received, }
+        \PY{c+c1}{\PYZsh{} Then hit Shift+Enter}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Mystery galaxy}
+        \PY{n}{plate} \PY{o}{=} \PY{l+m+mi}{2121}
+        \PY{n}{mjd} \PY{o}{=} \PY{l+m+mi}{54180}
+        \PY{n}{fiber} \PY{o}{=} \PY{l+m+mi}{414}
+        \PY{n}{norm} \PY{o}{=} \PY{l+m+mf}{22.}
+        
+        \PY{c+c1}{\PYZsh{} Or choose one of the galaxies below (you need to delete the \PYZdq{}\PYZsh{}\PYZdq{} sign in front of *ONE* block}
+        \PY{c+c1}{\PYZsh{} after the Galaxy name, in order to set plate, mjd, fiber and norm)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Galaxy Mystery2 \PYZhy{} detele the \PYZdq{}\PYZsh{}\PYZdq{} for the lines below }
+        \PY{c+c1}{\PYZsh{}plate = 1759}
+        \PY{c+c1}{\PYZsh{}mjd = 53081}
+        \PY{c+c1}{\PYZsh{}fiber = 126}
+        \PY{c+c1}{\PYZsh{}norm = 15.}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Galaxy Mystery3 \PYZhy{} detele the \PYZdq{}\PYZsh{}\PYZdq{} for the lines below}
+        \PY{c+c1}{\PYZsh{}plate = 1839}
+        \PY{c+c1}{\PYZsh{}mjd = 53471}
+        \PY{c+c1}{\PYZsh{}fiber = 310}
+        \PY{c+c1}{\PYZsh{}norm = 20.}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Galaxy Mystery4 \PYZhy{} detele the \PYZdq{}\PYZsh{}\PYZdq{} for the lines below}
+        \PY{c+c1}{\PYZsh{}plate = 2121}
+        \PY{c+c1}{\PYZsh{}mjd = 54180}
+        \PY{c+c1}{\PYZsh{}fiber = 523}
+        \PY{c+c1}{\PYZsh{}norm = 350.}
+        
+        \PY{n}{spec2} \PY{o}{=} \PY{n}{fetch\PYZus{}sdss\PYZus{}spectrum}\PY{p}{(}\PY{n}{plate}\PY{p}{,} \PY{n}{mjd}\PY{p}{,} \PY{n}{fiber}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} redshift value (0 for a star, and upward for distant galaxies e.g.: }
+        \PY{c+c1}{\PYZsh{} z=0.01, 0.02, 0.05, ... 0.1, 0.2, 0.3, ... 1.0)}
+        \PY{c+c1}{\PYZsh{} First run this cell with zero redshift, and then adjust the value.}
+        \PY{n}{z2} \PY{o}{=} \PY{l+m+mf}{0.0}
+        
+        \PY{c+c1}{\PYZsh{} now, we can plot the reference spectrum (at redshift=0)}
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{spec2}\PY{o}{.}\PY{n}{wavelength}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{spec2}\PY{o}{.}\PY{n}{spectrum}\PY{o}{/}\PY{n}{norm}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{spec}\PY{o}{.}\PY{n}{wavelength}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{1.}\PY{o}{+}\PY{n}{z2}\PY{p}{)}\PY{p}{,} \PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{/}\PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Galaxy B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wavelength}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brightness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{3800}\PY{p}{,}\PY{l+m+mi}{6000}\PY{p}{)}
+        \PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{1.2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Questions:}\label{questions}
+
+Which galaxy is closer to us?
+
+Further away from us?
+
+Now, let's check the redshift and learn more information about those two
+galaxies. You need to COPY and PASTE the following:
+http://cas.sdss.org/dr14/en/tools/explore/Summary.aspx in a new browser.
+\textbf{Clicking on the link does not work.}\\
+Click on "Search" on the left hand side menu bar, and then enter the
+"Plate", "Fiber" and "MJD" for one galaxy at a time, and hit "Go". If
+you click on the image, you can move around, zoom in and out - it's like
+Google Maps for the night sky!
+
+    \section{Redshift Ruler}\label{redshift-ruler}
+
+Each group had a different mystery galaxy. Let's see how far away they
+are compared with each other by placing them on the "redshift ruler" on
+the white board at the front of the room (if applicable).
+
+    \section{What's next?}\label{whats-next}
+
+Well done! You have measured redshifts for two galaxies, which is how
+astronomers determine distances to galaxies. Remember, the further away
+a galaxy is from us, the faster is seems to be moving away from us, and
+the more its light (spectrum) is redshifted! That's because the universe
+is expanding.
+
+Next, let's see what we can learn if we apply this information to many
+galaxies. Onward to exploring our vast universe!
+
+    \section{Activity 2: Look at the Position of Many
+Galaxies}\label{activity-2-look-at-the-position-of-many-galaxies}
+
+Similarly to using coordinates of latitude and longitude, the
+coordinates on the sky are defined onto a sphere. They are called RA
+(for Right Ascension) and Dec (for Declination). There are two
+illustrations below of these coordinate systems.
+
+Illustration of the celestial coordinate system with RA and Dec. You can
+read here for an explanation by the SDSS team.
+
+Illustration of the celestial coordinate system with RA and Dec. You can
+read on Wikipedia about Right Ascension and Declination.
+
+    \subsection{Step 2.1: Selecting Galaxies in a Region of the
+Sky}\label{step-2.1-selecting-galaxies-in-a-region-of-the-sky}
+
+Next, we will fetch the positions of galaxies on the sky, and plot their
+RA and Dec coordinates.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}Code that we will need to fetch galaxies\PYZsq{} coordinates}
+        \PY{k+kn}{from} \PY{n+nn}{astroML}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k}{import} \PY{n}{fetch\PYZus{}sdss\PYZus{}specgals}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{cm} \PY{k}{as} \PY{n+nn}{cm}
+        
+        \PY{c+c1}{\PYZsh{}For 3D Plotting:}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits}\PY{n+nn}{.}\PY{n+nn}{mplot3d} \PY{k}{import} \PY{n}{Axes3D}
+\end{Verbatim}
+
+
+    Now that the packages are loaded, run the cells below to actually fetch
+the galaxy sample and plot their positions on the sky.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Fetch the sample from the Sloan data}
+        \PY{n}{data} \PY{o}{=} \PY{n}{fetch\PYZus{}sdss\PYZus{}specgals}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Done retrieving the galaxy sample}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Define the coordinate variables for plotting}
+        \PY{n}{RA} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ra}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{DEC} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Range for RA values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{amin}\PY{p}{(}\PY{n}{RA}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{amax}\PY{p}{(}\PY{n}{RA}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Range for DEC values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{amin}\PY{p}{(}\PY{n}{DEC}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{amax}\PY{p}{(}\PY{n}{DEC}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} convert RA range to [\PYZhy{}180,+180] instead of [0,360]}
+        \PY{n}{RA} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{180}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Range for RA values after conversion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{amin}\PY{p}{(}\PY{n}{RA}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{amax}\PY{p}{(}\PY{n}{RA}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}plot the RA/DEC positions}
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{s}\PY{o}{=}\PY{l+m+mf}{0.8}   \PY{c+c1}{\PYZsh{}symbol size}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{RA}\PY{p}{,} \PY{n}{DEC}\PY{p}{,}\PY{n}{s}\PY{o}{=}\PY{n}{s}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SDSS Galaxies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RA (degrees)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DEC (degrees)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}range for the x axis (horizontal) and y axis (vertical)}
+        \PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+        \PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Step 2.2 Adding the 3rd
+Dimension}\label{step-2.2-adding-the-3rd-dimension}
+
+We saw before that in order to know the full distribution in 3D, we need
+to know how far away the galaxies are located. Here, we will add the
+information from the redshift. Remember: the larger the redshift, the
+further away the galaxy!
+
+First, we will plot all galaxies in red, and show galaxies that have
+approximately the same redshift in black. In this first example, we will
+select for values of redshift between z=0.10 and z=0.12. This is done by
+computing galaxies in a window of -0.01 and +0.1 around z=0.11 (since
+0.11-0.01=0.10 and 0.11+0.01=0.12). We call this an interval of
+redshift.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}Fetch the sample from the Sloan data}
+        \PY{n}{data} \PY{o}{=} \PY{n}{fetch\PYZus{}sdss\PYZus{}specgals}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Done retrieving the galaxy sample}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}define the variables for plotting}
+        \PY{n}{RA} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ra}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{DEC} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} convert RA range to [\PYZhy{}180,+180] instead of [0,360]}
+        \PY{n}{RA} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{180}
+        
+        \PY{c+c1}{\PYZsh{}define redshift variable z}
+        \PY{n}{z} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}pick a redshift range to highlight in a different color}
+        \PY{n}{rz} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{absolute}\PY{p}{(}\PY{n}{z}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.08}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{l+m+mf}{0.01}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}plot the RA/DEC positions}
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{RA}\PY{p}{,} \PY{n}{DEC}\PY{p}{,}\PY{n}{s}\PY{o}{=}\PY{l+m+mf}{5.0}\PY{p}{,}\PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{RA}\PY{p}{[}\PY{n}{rz}\PY{p}{]}\PY{p}{,} \PY{n}{DEC}\PY{p}{[}\PY{n}{rz}\PY{p}{]}\PY{p}{,}\PY{n}{s}\PY{o}{=}\PY{l+m+mf}{8.0}\PY{p}{,}\PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{}rz selected galaxies}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SDSS Galaxies (Thin Redshift Slice in Black)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RA (degrees)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DEC (degrees)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}range for the x axis (horizontal) and y axis (vertical)}
+        \PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+        \PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+    Now, instead of showing just one interval of redshift in black, we will
+show the redshift of each galaxy color-coded. Each galaxy is shown with
+a dot, and each dot will have a color corresponding to the redshift:
+purple/blue colors mean a low redshift like between 0-0.05, then
+green/yellow mean slightly higher redshift like 0.1, and so on until the
+higher redshift shown here of 0.2 in red. Remember that this means that
+points with exactly the same color are at the same distance from us!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}Fetch the sample from the Sloan data}
+        \PY{n}{data} \PY{o}{=} \PY{n}{fetch\PYZus{}sdss\PYZus{}specgals}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}define the variables for plotting}
+        \PY{n}{RA} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ra}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{DEC} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} convert RA range to [\PYZhy{}180,+180] instead of [0,360]}
+        \PY{n}{RA} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{180}
+        
+        \PY{c+c1}{\PYZsh{}plot the RA/DEC positions}
+        \PY{c+c1}{\PYZsh{}figure(figsize=(8,4.75))}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mf}{4.75}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Tests to get black bckgrd}
+        \PY{c+c1}{\PYZsh{}plt.style.use(\PYZsq{}default\PYZsq{})}
+        \PY{c+c1}{\PYZsh{}plt.style.use(\PYZsq{}dark\PYZus{}background\PYZsq{})}
+        \PY{c+c1}{\PYZsh{}plt.rcParams[\PYZsq{}figure.facecolor\PYZsq{}] = \PYZsq{}black\PYZsq{}}
+        
+        \PY{n}{s}\PY{o}{=}\PY{l+m+mf}{4.5}   \PY{c+c1}{\PYZsh{}symbol size}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{RA}\PY{p}{,} \PY{n}{DEC}\PY{p}{,}\PY{n}{s}\PY{o}{=}\PY{n}{s}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{,}
+                    \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Add a rextangle to show where we will zoom in next:}
+        \PY{c+c1}{\PYZsh{} We give the (x,y) of 4 corners + repeat first corner to close the rectangle}
+        \PY{c+c1}{\PYZsh{}plt.plot([4,4,6,6,4], [11,13,13,11,11], color=\PYZsq{}black\PYZsq{}, linewidth=2)}
+        
+        \PY{c+c1}{\PYZsh{} Plot labels for the title and both horizontal (x) and vertical (y) axes}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SDSS Galaxies (Color\PYZhy{}Coded by redshift)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RA (degrees)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DEC (degrees)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}range for the x axis (horizontal) and y axis (vertical)}
+        \PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+        \PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}color bar}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Next, you will make a 3D version of the above 2D plot
+(same dots but in 3D). You may need to execute the cell
+twice.}\label{next-you-will-make-a-3d-version-of-the-above-2d-plot-same-dots-but-in-3d.-you-may-need-to-execute-the-cell-twice.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}3D Plotting}
+        
+        \PY{c+c1}{\PYZsh{}Fetch the sample from the Sloan data}
+        \PY{n}{data} \PY{o}{=} \PY{n}{fetch\PYZus{}sdss\PYZus{}specgals}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}define the variables for plotting}
+        \PY{n}{RA} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ra}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{RA} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{180} \PY{c+c1}{\PYZsh{} convert RA range to [\PYZhy{}180,+180] instead of [0,360]}
+        \PY{n}{DEC} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{z} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Setting ranges}
+        \PY{n}{limits} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{RA}\PY{o}{\PYZlt{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{RA}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{DEC}\PY{o}{\PYZgt{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{DEC}\PY{o}{\PYZlt{}}\PY{l+m+mi}{18}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{z}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z}\PY{o}{\PYZlt{}}\PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{RA\PYZus{}new} \PY{o}{=} \PY{n}{RA}\PY{p}{[}\PY{n}{limits}\PY{p}{]}
+        \PY{n}{DEC\PYZus{}new} \PY{o}{=} \PY{n}{DEC}\PY{p}{[}\PY{n}{limits}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}define redshift variable z}
+        
+        \PY{n}{z\PYZus{}new} \PY{o}{=} \PY{n}{z}\PY{p}{[}\PY{n}{limits}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}plot the RA/DEC positions}
+        \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{p} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{RA\PYZus{}new}\PY{p}{,} \PY{n}{z\PYZus{}new}\PY{p}{,} \PY{n}{DEC\PYZus{}new}\PY{p}{,} \PY{n}{zdir}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mf}{2.5}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{z\PYZus{}new}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{depthshade}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{n}{p}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot labels for the title and both horizontal (x) and vertical (y) axes}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SDSS Galaxies (Color\PYZhy{}Coded by redshift)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RA (deg)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Redshift (z)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}zlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DEC (deg)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}range for the x axis (horizontal) and y axis (vertical)}
+        \PY{c+c1}{\PYZsh{} ax.set\PYZus{}xlim3d(0,10)}
+        \PY{c+c1}{\PYZsh{} ax.set\PYZus{}zlim3d(10,18)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    The color bar to the right-hand side shows the correspondence between
+color and redshift. As mentioned before, points with exactly the same
+color are at the same distance from us. Purple points are the closest to
+us, then blue, aqua, green and so on. Think about which galaxies/colors
+are near and which galaxies/colors are far.
+
+\subsection{Questions:}\label{questions}
+
+Can you use this information to imagine the distribution of galaxies in
+3D?
+
+Do you notice any structure together at the same distance from us?
+
+The black rectangle in the figure shows where we will zoom in during the
+next exercise below.
+
+    \subsection{Step 2.3 Zooming In and Zooming
+Out}\label{step-2.3-zooming-in-and-zooming-out}
+
+Now, we will repeat the plots from Step 2.2 above, but with a zoom on a
+smaller region ("zooming in"), and then over a larger region ("zooming
+out").
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} ZOOMING IN}
+        
+        \PY{c+c1}{\PYZsh{}Fetch the sample from the Sloan data}
+        \PY{n}{data} \PY{o}{=} \PY{n}{fetch\PYZus{}sdss\PYZus{}specgals}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}define the variables for plotting}
+        \PY{n}{RA} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ra}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{DEC} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} convert RA range to [\PYZhy{}180,+180] instead of [0,360]}
+        \PY{n}{RA} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{180}
+        
+        \PY{c+c1}{\PYZsh{}plot the RA/DEC positions}
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{s}\PY{o}{=}\PY{l+m+mf}{10.0}   \PY{c+c1}{\PYZsh{}symbol size}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{RA}\PY{p}{,} \PY{n}{DEC}\PY{p}{,}\PY{n}{s}\PY{o}{=}\PY{n}{s}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{,}
+                    \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SDSS Galaxies (Zoom In)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RA (degrees)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DEC (degrees)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}range for the x axis (horizontal) and y axis (vertical)}
+        \PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}
+        \PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}color bar}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Count how many galaxies are within the plot}
+        \PY{n}{points} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{column\PYZus{}stack}\PY{p}{(}\PY{p}{[}\PY{n}{RA}\PY{p}{,} \PY{n}{DEC}\PY{p}{]}\PY{p}{)}
+        \PY{n}{verts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+        \PY{n}{path} \PY{o}{=} \PY{n}{mpath}\PY{o}{.}\PY{n}{Path}\PY{p}{(}\PY{n}{verts}\PY{p}{)}
+        \PY{n}{points\PYZus{}inside} \PY{o}{=} \PY{n}{points}\PY{p}{[}\PY{n}{path}\PY{o}{.}\PY{n}{contains\PYZus{}points}\PY{p}{(}\PY{n}{points}\PY{p}{)}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of galaxies in the plot above:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{points\PYZus{}inside}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Next, you will make a 3D version of the above 2D plot
+(same dots but in 3D). You may need to execute the cell
+twice.}\label{next-you-will-make-a-3d-version-of-the-above-2d-plot-same-dots-but-in-3d.-you-may-need-to-execute-the-cell-twice.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}3D Plotting}
+        
+        \PY{c+c1}{\PYZsh{}Fetch the sample from the Sloan data}
+        \PY{n}{data} \PY{o}{=} \PY{n}{fetch\PYZus{}sdss\PYZus{}specgals}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}define the variables for plotting}
+        \PY{n}{RA} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ra}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{RA} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{180} \PY{c+c1}{\PYZsh{} convert RA range to [\PYZhy{}180,+180] instead of [0,360]}
+        \PY{n}{DEC} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{z} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Setting ranges}
+        \PY{n}{limits} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{RA}\PY{o}{\PYZlt{}}\PY{l+m+mi}{6}\PY{p}{,} \PY{n}{RA}\PY{o}{\PYZgt{}}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{DEC}\PY{o}{\PYZgt{}}\PY{l+m+mi}{11}\PY{p}{,} \PY{n}{DEC}\PY{o}{\PYZlt{}}\PY{l+m+mi}{13}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{z}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{z}\PY{o}{\PYZlt{}}\PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{RA\PYZus{}new} \PY{o}{=} \PY{n}{RA}\PY{p}{[}\PY{n}{limits}\PY{p}{]}
+        \PY{n}{DEC\PYZus{}new} \PY{o}{=} \PY{n}{DEC}\PY{p}{[}\PY{n}{limits}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}define redshift variable z}
+        
+        \PY{n}{z\PYZus{}new} \PY{o}{=} \PY{n}{z}\PY{p}{[}\PY{n}{limits}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}plot the RA/DEC positions}
+        \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mf}{4.75}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{p} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{RA\PYZus{}new}\PY{p}{,} \PY{n}{z\PYZus{}new}\PY{p}{,} \PY{n}{DEC\PYZus{}new}\PY{p}{,} \PY{n}{zdir}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{z\PYZus{}new}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{depthshade}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{n}{p}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot labels for the title and both horizontal (x) and vertical (y) axes}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SDSS Galaxies (Color\PYZhy{}Coded by redshift)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RA (deg)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Redshift (z)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}zlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DEC (deg)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Questions:}\label{questions}
+
+What do see?
+
+Any interesting galaxy structures?
+
+What galaxy structures are closer/further from you?
+
+ \#\#\# Now, let's step back and plot galaxies over a large region of
+the sky!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} ZOOMING OUT}
+        
+        \PY{c+c1}{\PYZsh{}Fetch the sample from the Sloan data}
+        \PY{n}{data} \PY{o}{=} \PY{n}{fetch\PYZus{}sdss\PYZus{}specgals}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}define the variables for plotting}
+        \PY{n}{RA} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ra}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{DEC} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} convert RA range to [\PYZhy{}180,+180] instead of [0,360]}
+        \PY{n}{RA} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{180}
+        
+        \PY{c+c1}{\PYZsh{}plot the RA/DEC positions}
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{s}\PY{o}{=}\PY{l+m+mf}{1.0}   \PY{c+c1}{\PYZsh{}symbol size}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{RA}\PY{p}{,} \PY{n}{DEC}\PY{p}{,}\PY{n}{s}\PY{o}{=}\PY{n}{s}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{,}
+                    \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Add a rextangle where we zoomed in before:}
+        \PY{c+c1}{\PYZsh{} We give the (x,y) of 4 corners + repeat first corner to close the rectangle}
+        \PY{c+c1}{\PYZsh{}plt.plot([4,4,6,6,4], [11,13,13,11,11], color=\PYZsq{}black\PYZsq{}, linewidth=1)}
+        
+        \PY{c+c1}{\PYZsh{} Add original rectangle (before zooming in)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} Plot labels for the title and both horizontal (x) and vertical (y) axes}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SDSS Galaxies (Zoom Out)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RA (degrees)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DEC (degrees)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}range for the x axis (horizontal) and y axis (vertical)}
+        \PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}color bar}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Count how many galaxies are within the plot}
+        \PY{n}{points} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{column\PYZus{}stack}\PY{p}{(}\PY{p}{[}\PY{n}{RA}\PY{p}{,} \PY{n}{DEC}\PY{p}{]}\PY{p}{)}
+        \PY{n}{verts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{15}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+        \PY{n}{path} \PY{o}{=} \PY{n}{mpath}\PY{o}{.}\PY{n}{Path}\PY{p}{(}\PY{n}{verts}\PY{p}{)}
+        \PY{n}{points\PYZus{}inside} \PY{o}{=} \PY{n}{points}\PY{p}{[}\PY{n}{path}\PY{o}{.}\PY{n}{contains\PYZus{}points}\PY{p}{(}\PY{n}{points}\PY{p}{)}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of galaxies in the plot above:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{points\PYZus{}inside}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    The color bar to the right-hand side shows the correspondence between
+color and redshift. The black rectangle shows the region from the
+previous plot ("Zoomed In"). You can compare the size of the two regions
+directly.
+
+\subsection{Questions:}\label{questions}
+
+How many times more galaxies are in the large (zoomed out) view relative
+to the small (zoomed in) view?
+
+How many times can you fit the small region within the large region?
+(Hint: compute the size from the axes)
+
+Are those two numbers above the same? What does it mean?
+
+What do you see now on the zoomed out view?
+
+Are those structures smaller or larger?
+
+    \subsection{Bonus: Plot Full Sample over Sky
+Projection}\label{bonus-plot-full-sample-over-sky-projection}
+
+Below, we will again plot the positions of galaxies, and include the
+information on redshift as the color (but with a different color
+scheme).
+
+The difference with the steps above is that we will now plot the sample
+of galaxies over the full sky. The SDSS survey does not cover the full
+sky, so we will see what we call the "footprint" of the survey. This
+means the regions of the sky where the telescope was pointed to gather
+images and spectra.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} plot the RA/DEC in an area\PYZhy{}preserving projection}
+        
+        \PY{c+c1}{\PYZsh{}Actually fetch the sample from the Sloan data}
+        \PY{n}{data} \PY{o}{=} \PY{n}{fetch\PYZus{}sdss\PYZus{}specgals}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Define coordinate variables}
+        \PY{n}{RA} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ra}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{DEC} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} convert coordinates to degrees}
+        \PY{n}{RA} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{180}
+        \PY{n}{RA} \PY{o}{*}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pi} \PY{o}{/} \PY{l+m+mi}{180}
+        \PY{n}{DEC} \PY{o}{*}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pi} \PY{o}{/} \PY{l+m+mi}{180}
+        
+        \PY{c+c1}{\PYZsh{} keep galaxies in a selected area}
+        \PY{c+c1}{\PYZsh{}rkeep = np.where(RA between [\PYZhy{}30,0] and DEC between [15,30])}
+        
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axes}\PY{p}{(}\PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mollweide}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axes}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{RA}\PY{p}{,} \PY{n}{DEC}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{,}
+                    \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SDSS DR8 Spectroscopic Galaxies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{cb} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{n}{cax}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{axes}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.9}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                          \PY{n}{orientation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{horizontal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                          \PY{n}{ticks}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+        \PY{n}{cb}\PY{o}{.}\PY{n}{set\PYZus{}label}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{redshift}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    HINT: for more color maps, you can look at this reference page. For
+example, you can replace "rainbow" with "autumn\_r".
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
