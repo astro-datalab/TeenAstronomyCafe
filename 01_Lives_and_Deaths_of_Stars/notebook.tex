@@ -1,0 +1,833 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Lives\_and\_Deaths\_of\_Stars}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+     The Lives and Deaths of Stars
+
+\subparagraph{Written by Gautham Narayan,
+STScI}\label{written-by-gautham-narayan-stsci}
+
+We talked about the lives of deaths and stars, but now it's time to play
+with real data, and see this story with your own eyes. This is
+interactive! You get to do anything you like with the data! DON'T WORRY!
+YOU WILL NOT BREAK ANYTHING! Want to try something? Just go right ahead!
+
+Want to know how to do something but aren't sure? Ask questions! \_\_\_
+
+    \section{Table of Contents}\label{table-of-contents}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{how-to-use-this-notebook}
+\item
+  Section \ref{pre-activity-setup}
+\item
+  Section \ref{activity-1-graphing-some-data}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{step-11-making-a-scatter-plot}
+  \item
+    Section \ref{step-12-graphing-a-function}
+  \end{itemize}
+\item
+  Section \ref{activity-2-graphing-real-data-from-stars}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{step-21-selecting-spectra-to-plot}
+  \item
+    Section \ref{step-22-plotting-your-first-spectrum}
+  \item
+    Section \ref{step-23-plotting-a-second-spectrum}
+  \item
+    Section \ref{step-24-plotting-vega}
+  \end{itemize}
+\item
+  Section \ref{activity-3-plotting-the-main-sequence}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{step-31-entering-the-data-from-some-stars}
+  \item
+    Section \ref{step-32-plot-the-star-data}
+  \item
+    Section \ref{step-33-get-a-sense-for-the-sizes-and-colors-of-these-stars}
+  \end{itemize}
+\item
+  Section \ref{activity-4-looking-at-the-life-cycles-of-stars} \_\_\_
+\end{itemize}
+
+    \section{How to Use This Notebook}\label{how-to-use-this-notebook}
+
+The webpage you are in is actually an app - much like the ones on your
+cellphone. This app consists of cells.
+
+An \emph{input} cell looks like a light grey box with an
+\texttt{In\ {[}\ {]}:} on its left. Input cells each contain code -
+instructions to make the computer do something.
+
+To activate or select a cell, click anywhere inside of it.
+
+\begin{verbatim}
+<font size='3'><b>Select the cell below and read its contents.</b></font>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Text that follows a \PYZdq{}\PYZsh{}\PYZdq{} is known as a comment.}
+        \PY{c+c1}{\PYZsh{} Comments do not affect your code in any way.}
+        \PY{c+c1}{\PYZsh{} You should always read the comments at the top of each cell you interact with.}
+        \PY{c+c1}{\PYZsh{} Comments will be used to describe what the cell\PYZsq{}s code is actually doing.}
+\end{Verbatim}
+
+
+    To execute or run a selected cell, hit \texttt{{[}Shift\ +\ Enter{]}} on
+your keyboard.
+
+\begin{verbatim}
+<font size='3'><b>Select the cell below and read its contents. Then, run the cell.</b></font>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Text that DOESN\PYZsq{}T follow a \PYZdq{}\PYZsh{}\PYZdq{} is considered code.}
+        \PY{c+c1}{\PYZsh{} Lines of code are instructions given to your computer.}
+        \PY{c+c1}{\PYZsh{} The line of code below is a \PYZdq{}print\PYZdq{} statement.}
+        \PY{c+c1}{\PYZsh{} A print statement literally prints out the text between its quotes.}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Congrats! You have successfully run your first cell!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Running a cell creates an \emph{output} directly below it. An output can
+be some text, a graph, an interactive slider, or even nothing at all!
+For that last case, you know you have run a cell when the
+\texttt{In\ {[}\ {]}:} becomes \texttt{In\ {[}\#{]}:}, where "\#" is any
+number.
+
+You can learn more about how Jupyter notebooks work at
+https://try.jupyter.org/ \_\_\_
+
+    \section{Pre-Activity Setup}\label{pre-activity-setup}
+
+In order for any of the activities to work properly, you must import the
+libraries needed for the code in this notebook.
+
+\begin{verbatim}
+<font size='3'><b>Select and run the cell below.</b></font>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Here, you are importing the libraries needed for this notebook.}
+        \PY{c+c1}{\PYZsh{} These libraries set up the plotting environment in your browser.}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} notebook
+        \PY{o}{\PYZpc{}}\PY{k}{pylab}
+        \PY{k+kn}{from} \PY{n+nn}{astroML}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k}{import} \PY{n}{fetch\PYZus{}sdss\PYZus{}spectrum}\PY{p}{,} \PY{n}{fetch\PYZus{}vega\PYZus{}spectrum}\PY{p}{,} \PY{n}{fetch\PYZus{}sdss\PYZus{}S82standards}
+        \PY{k+kn}{from} \PY{n+nn}{astroML}\PY{n+nn}{.}\PY{n+nn}{plotting} \PY{k}{import} \PY{n}{MultiAxes}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image}\PY{p}{,} \PY{n}{display}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \section{Activity 1: Graphing Some
+Data}\label{activity-1-graphing-some-data}
+
+In this activity, you'll take the first step towards become a computer
+programmer! One of the first things scientists want to do when they get
+data is to take a look at it - plot it on a graph! This activity is
+going to show you how to plot data. \_\_\_
+
+    \subsection{Step 1.1: Making a Scatter
+Plot}\label{step-1.1-making-a-scatter-plot}
+
+\begin{verbatim}
+<h3 class='alert-heading'>Helpful Reminder(s)</h3>
+<ul>
+    <li>Click anywhere inside of a cell to select it.</li>
+    <li>Hit [Shift + Enter] to run a selected cell.</li>
+</ul>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} You don\PYZsq{}t need to use the same numbers, or indeed even these many \PYZhy{} put in whatever you like for x \PYZam{} y.}
+        
+        \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{11}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}
+        \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{17}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{,} \PY{l+m+mi}{18}\PY{p}{]}
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Scatter is the most basic plotting command, and plots a bunch of point -
+notice that there are blue dots on the X and Y locations you entered!
+\_\_\_
+
+    \subsection{Step 1.2: Graphing a
+Function}\label{step-1.2-graphing-a-function}
+
+There are several other plotting commands - the one we'll use mostly is
+called "plot".
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} What\PYZsq{}s nifty is that you can plot functions as well! }
+        \PY{c+c1}{\PYZsh{} Want to know what x to the 3.5 power + 57 is? Compute and plot it!}
+        
+        \PY{c+c1}{\PYZsh{} This command creates a series of numbers from 0 to 20 increasing by 1.}
+        \PY{n}{x} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{,}\PY{l+m+mi}{20000}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} If you want, you can print it out.}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{)} 
+        
+        \PY{c+c1}{\PYZsh{} You can now relate y to x with some function of the sort you\PYZsq{}ve learned in school.}
+        \PY{n}{y} \PY{o}{=} \PY{l+m+mi}{3}\PY{o}{*}\PY{n}{x} \PY{o}{+} \PY{l+m+mf}{5.1} \PY{o}{+} \PY{l+m+mi}{40}\PY{o}{*}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{o}{/}\PY{l+m+mf}{10.}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{20}\PY{o}{*}\PY{n}{tan}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Now, you can plot your data!}
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{None}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Nifty! We've gone from plotting a bunch of points to plotting something
+continious - a curve.
+
+You can plot all sorts of different curves - parabolas, sines and
+cosines or other trig functions, or whatever you can imagine really! Try
+it! You can create new cells below this one, by clicking it, then using
+the menu at the top - \textbf{Insert \textgreater{} Insert Cell Below}.
+
+Type in your code for y based on x (you can even change x) and then plot
+it with the plot command from above. Then, hit
+\texttt{{[}Shift\ +\ Enter{]}} to run it! \_\_\_
+
+    \section{Activity 2: Graphing Real Data from
+Stars}\label{activity-2-graphing-real-data-from-stars}
+
+Just like we plotted the data above, we can now plot a spectrum of a
+star!
+
+To do this, we are going to use data from the
+\href{http://sdss.org}{Sloan Digital Sky Survey (SDSS)}. This project
+used a telescope at Apache Point in New Mexico to look at the northern
+sky.
+
+\begin{verbatim}
+<center>
+    <br>
+    <img src='https://apod.nasa.gov/apod/image/9806/sloan_fermilab_big.jpg', width='300'>
+    <br>
+    <figcaption>
+        <font color='grey'>
+            <b>Figure 1:</b>
+            The Sloan Telescope at Apache Point, New Mexico.
+            <br>
+            <b>Image Credit:</b>
+            SDSS Team, Fermilab Visual Media Services.
+        </font>
+    </figcaption>
+</center>
+\end{verbatim}
+
+It was the first "Big Data" project in astronomy. Sloan found millions
+of stars and galaxies, and made their data public. What we're going to
+do is start to play with SDSS data. \_\_\_
+
+    \subsection{Step 2.1: Selecting Spectra to
+Plot}\label{step-2.1-selecting-spectra-to-plot}
+
+Click \href{http://classic.sdss.org/dr5/algorithms/spectemplates/}{here}
+for the spectra of different stars.
+
+Look at the gif links, and look for \textbf{Plate}, \textbf{Fiber} and
+\textbf{MJD}. Write them down on a piece of paper.
+
+Next, let's go look at the data for that star
+\href{http://cas.sdss.org/dr14/en/tools/explore/Summary.aspx}{here}.
+
+Click on \textbf{Search} on the left hand side menu bar, and then enter
+the \textbf{Plate}, \textbf{Fiber} and \textbf{MJD} that you wrote down
+there, and hit \textbf{Go}.
+
+If you click on the image, you can move around, zoom in and out - it's
+like Google Maps for the night sky! \_\_\_
+
+    \subsection{Step 2.2: Plotting Your First
+Spectrum}\label{step-2.2-plotting-your-first-spectrum}
+
+Take the same \textbf{Plate}, \textbf{Fiber}, and \textbf{MJD} numbers
+from earlier and enter them into the code below - make sure they match!
+
+Then, run the cell.
+
+\begin{verbatim}
+<h3 class='alert-heading'>Helpful Reminder(s)</h3>
+<ul>
+    <li>Click anywhere inside of a cell to select it.</li>
+    <li>Hit [Shift + Enter] to run a selected cell.</li>
+</ul>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Fetch single spectrum \PYZhy{} Enter the same \PYZdq{}Plate\PYZdq{}, \PYZdq{}MJD\PYZdq{} and \PYZdq{}Fiber\PYZdq{} numbers here.}
+        
+        \PY{n}{plate} \PY{o}{=} \PY{l+m+mi}{300}
+        \PY{n}{mjd} \PY{o}{=} \PY{l+m+mi}{51666}
+        \PY{n}{fiber} \PY{o}{=} \PY{l+m+mi}{128}
+        \PY{n}{spec} \PY{o}{=} \PY{n}{fetch\PYZus{}sdss\PYZus{}spectrum}\PY{p}{(}\PY{n}{plate}\PY{p}{,} \PY{n}{mjd}\PY{p}{,} \PY{n}{fiber}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} now, just as before, we can plot the data}
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{spec}\PY{o}{.}\PY{n}{wavelength}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{/}\PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wavelength}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brightness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    That's the same spectrum as is on the webpage!
+
+What you did was pull data from the web into your app. Now you can run
+whatever code you like on the data!
+
+This is a key element of data analysis.
+
+Let's zoom in on the part of the spectrum we can see with our eyes -
+"VIBGYOR" is about \(4000\) to \(7000\) Angstroms - or \(10^{-10}\)
+meters (\(0.\) followed by nine zeros and then a \(1\) - really small!).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Lets look at the range where our eyes can see.}
+        
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{spec}\PY{o}{.}\PY{n}{wavelength}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{/}\PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wavelength}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brightness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{4000}\PY{p}{,}\PY{l+m+mi}{7000}\PY{p}{)}
+        \PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{1.2}\PY{p}{)}
+\end{Verbatim}
+
+
+    See those dips - those are the absorption lines we talked about! They
+are the chemical fingerprint of a star.
+
+This star has lines from Hydrogen and Helium - the first and second
+elements on the periodic table, and the two most common elements in the
+entire Universe.
+
+You can also tell something about the star from its spectrum. It's
+higher on the left (at lower wavelengths) than the right (at higher
+wavelengths).
+
+The low end of this wavelength range (\(4000\) Angstroms) is what our
+eyes percieve as blue - or simply, this star will look blue! \_\_\_
+
+    \subsection{Step 2.3: Plotting a Second
+Spectrum}\label{step-2.3-plotting-a-second-spectrum}
+
+Not all stars look the same. Pick another star from the page, get its
+\textbf{Fiber}, \textbf{Plate}, and \textbf{MJD}, and let us plot that
+too.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Fetch a second spectrum.}
+        
+        \PY{n}{plate2} \PY{o}{=} \PY{l+m+mi}{273}
+        \PY{n}{mjd2} \PY{o}{=} \PY{l+m+mi}{51957}
+        \PY{n}{fiber2} \PY{o}{=} \PY{l+m+mi}{304}
+        \PY{n}{spec2} \PY{o}{=} \PY{n}{fetch\PYZus{}sdss\PYZus{}spectrum}\PY{p}{(}\PY{n}{plate2}\PY{p}{,} \PY{n}{mjd2}\PY{p}{,} \PY{n}{fiber2}\PY{p}{)}
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{spec}\PY{o}{.}\PY{n}{wavelength}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{/}\PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{spec2}\PY{o}{.}\PY{n}{wavelength}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{spec2}\PY{o}{.}\PY{n}{spectrum}\PY{o}{/}\PY{n}{spec2}\PY{o}{.}\PY{n}{spectrum}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wavelength}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brightness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{4000}\PY{p}{,}\PY{l+m+mi}{7000}\PY{p}{)}
+        \PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{1.2}\PY{p}{)}
+\end{Verbatim}
+
+
+    Notice it has some of the same absorption lines in the same places as
+the other star, but they are deeper - it has relatively more of that
+element.
+
+But that isn't all! This star, plotted in red, is lower on the left
+(blue) side than the right (red) side - it'll look red!
+
+\begin{quote}
+Remember: From the H-R diagram, the color of stars is related to their
+temperature - the redder star is cooler than the hot blue star!
+\end{quote}
+
+If you can figure out the color of stars, you can figure out their
+temperature, their mass and their size.
+
+\begin{verbatim}
+<center>
+    <br>
+    <img src='http://astro.ib-host.net/pics/HR-diagram.jpg', width='600'>
+    <br>
+    <figcaption>
+        <font color='grey'>
+            <b>Figure 2:</b>
+            The H-R diagram.
+        </font>
+    </figcaption>
+</center>
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsection{Step 2.4: Plotting Vega}\label{step-2.4-plotting-vega}
+
+Plot the spectrum of Vega (in the middle of the upper plot), and see
+what this star looks like.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Fetch a third spectrum.}
+        
+        \PY{n}{spec3} \PY{o}{=} \PY{n}{fetch\PYZus{}vega\PYZus{}spectrum}\PY{p}{(}\PY{p}{)}
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{spec3}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{spec3}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{n}{spec3}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{spec}\PY{o}{.}\PY{n}{wavelength}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{/}\PY{n}{spec}\PY{o}{.}\PY{n}{spectrum}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{spec2}\PY{o}{.}\PY{n}{wavelength}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{spec2}\PY{o}{.}\PY{n}{spectrum}\PY{o}{/}\PY{n}{spec2}\PY{o}{.}\PY{n}{spectrum}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wavelength}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brightness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{4000}\PY{p}{,}\PY{l+m+mi}{7000}\PY{p}{)}
+        \PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{1.2}\PY{p}{)}
+\end{Verbatim}
+
+
+    This third star plotted in blue, is Vega - one of the brightest stars in
+the sky.
+
+It's one of the three stars that make up the Summer Triangle.
+
+\begin{verbatim}
+<center>
+    <br>
+    <img src='http://astropixels.com/milkyway/wide/images/MilkyWay12-501w.jpg', width='600'>
+    <br>
+    <figcaption>
+        <font color='grey'>
+            <b>Figure 3:</b>
+            The three bright stars of the Summer Triangle with our galaxy, the Milky Way, behind. Each of those specs of light is a star! There are some hundred billion stars in our Galaxy alone!
+        </font>
+    </figcaption>
+</center>
+\end{verbatim}
+
+Even here you can see that stars have a range of colors - or really
+temperatures.
+
+Remember that the stars need fuel to resist the crushing pull of
+gravity. While stars burn Hydrogen and produce Helium in their core,
+they are said to be on \textbf{The Main Sequence}.
+
+You could scroll up and look at that figure again... OR we can just plot
+the main sequence from data ourselves! \_\_\_
+
+    \section{Activity 3: Plotting the Main
+Sequence}\label{activity-3-plotting-the-main-sequence}
+
+Now that we've seen that spectra of stars are different, lets compare
+the brightness and colors of a lot of different stars. \_\_\_
+
+    \subsection{Step 3.1: Entering the Data from Some
+Stars}\label{step-3.1-entering-the-data-from-some-stars}
+
+This is just like Section \ref{activity-1-graphing-some-data}, except
+instead of calling it "x" and "y", I'm calling it "color" and
+"brightness".
+
+I've already entered the data below - all you have to do is run the
+cell.
+
+\begin{verbatim}
+<h3 class='alert-heading'>Helpful Reminder(s)</h3>
+<ul>
+    <li>Click anywhere inside of a cell to select it.</li>
+    <li>Hit [Shift + Enter] to run a selected cell.</li>
+</ul>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} First, lets take some data that I\PYZsq{}ve entered directly from the SDSS}
+        \PY{n}{star} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sun}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sirius}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Canopus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Arcturus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AlphaCen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vega}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Capella}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rigel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Procyon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Betelgeuse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Achernar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hadar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Acrux}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Altair}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Aldebaran}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Antares}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spica}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pollux}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Formalhaut}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Becrux}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Deneb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Regulus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adhara}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shaula}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gacrux}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Castor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{apparent\PYZus{}brightness} \PY{o}{=} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{26.8}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.46}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.72}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.04}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.08}\PY{p}{,} \PY{l+m+mf}{0.12}\PY{p}{,} \PY{l+m+mf}{0.38}\PY{p}{,} \PY{l+m+mf}{0.41}\PY{p}{,} \PY{l+m+mf}{0.46}\PY{p}{,} \PY{l+m+mf}{0.63}\PY{p}{,} \PY{l+m+mf}{0.76}\PY{p}{,} \PY{l+m+mf}{0.77}\PY{p}{,} \PY{l+m+mf}{0.85}\PY{p}{,} \PY{l+m+mf}{0.92}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.14}\PY{p}{,} \PY{l+m+mf}{1.16}\PY{p}{,} \PY{l+m+mf}{1.2}\PY{p}{,} \PY{l+m+mf}{1.25}\PY{p}{,} \PY{l+m+mf}{1.35}\PY{p}{,} \PY{l+m+mf}{1.5}\PY{p}{,} \PY{l+m+mf}{1.6}\PY{p}{,} \PY{l+m+mf}{1.63}\PY{p}{,} \PY{l+m+mf}{1.98}\PY{p}{]}
+        \PY{n}{brightness} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{4.8}\PY{p}{,} \PY{l+m+mf}{1.4}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{2.5}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{4.4}\PY{p}{,} \PY{l+m+mf}{0.6}\PY{p}{,} \PY{l+m+mf}{0.4}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{8.1}\PY{p}{,} \PY{l+m+mf}{2.6}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{7.2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.3}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{4.4}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{4.6}\PY{p}{,} \PY{l+m+mf}{2.3}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{5.2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{3.2}\PY{p}{,} \PY{l+m+mf}{0.7}\PY{p}{,} \PY{l+m+mf}{2.0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{4.7}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{7.2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{4.8}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{3.5}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.2}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}
+        \PY{n}{color} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.63}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.15}\PY{p}{,} \PY{l+m+mf}{1.23}\PY{p}{,} \PY{l+m+mf}{0.71}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.08}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.03}\PY{p}{,} \PY{l+m+mf}{0.42}\PY{p}{,} \PY{l+m+mf}{1.85}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.16}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.23}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.24}\PY{p}{,} \PY{l+m+mf}{0.22}\PY{p}{,} \PY{l+m+mf}{1.54}\PY{p}{,} \PY{l+m+mf}{1.83}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.23}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{0.09}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.23}\PY{p}{,} \PY{l+m+mf}{0.09}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.11}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.21}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.22}\PY{p}{,} \PY{l+m+mf}{1.59}\PY{p}{,} \PY{l+m+mf}{0.03}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsection{Step 3.2: Plot the Star
+Data}\label{step-3.2-plot-the-star-data}
+
+Lets plot the data we entered in the last two cells with the scatter
+command we used in Section \ref{activity-1-graphing-some-data}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} We\PYZsq{}ll use the size property \PYZsq{}s\PYZsq{} to scale the points by the brightness.}
+        
+        \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{cmap} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{ScalarMappable}\PY{p}{(}\PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{jet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{colors}\PY{o}{=}\PY{n}{cmap}\PY{o}{.}\PY{n}{to\PYZus{}rgba}\PY{p}{(}\PY{n}{arctan}\PY{p}{(}\PY{n}{array}\PY{p}{(}\PY{n}{color}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n}{scatter}\PY{p}{(}\PY{n}{color}\PY{p}{,}\PY{n}{brightness}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{colors}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10} \PY{o}{+} \PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.4}\PY{o}{*}\PY{n}{array}\PY{p}{(}\PY{n}{brightness}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} if you want to see which star is which, remove the \PYZsq{}\PYZsh{}\PYZsq{} in front of the next two lines}
+        
+        \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{name} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{star}\PY{p}{)}\PY{p}{:}
+            \PY{n}{annotate}\PY{p}{(}\PY{n}{name}\PY{p}{,}\PY{p}{(}\PY{n}{color}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{brightness}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brightness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Main Sequence of the Brightest Stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Brightness is a little weird \PYZhy{} remember that smaller numbers mean that the star is brighter }
+        \PY{c+c1}{\PYZsh{} It\PYZsq{}s a little like the Top 100 charts \PYZhy{} a ranked list}
+        \PY{c+c1}{\PYZsh{} With the smaller the number being the higher rank}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{invert\PYZus{}xaxis}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{invert\PYZus{}yaxis}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsection{Step 3.3: Get a Sense for the Sizes and Colors of These
+Stars}\label{step-3.3-get-a-sense-for-the-sizes-and-colors-of-these-stars}
+
+The stars on the left hand side like Betelgeuse and Antares, are red
+giant stars nearing the end of their lives.
+
+\begin{verbatim}
+<center>
+    <br>
+    <img src='https://upload.wikimedia.org/wikipedia/commons/4/47/Orion_Head_to_Toe.jpg', width='600'>
+    <br>
+    <figcaption>
+        <font color='grey'>
+            <b>Figure 4:</b>
+            Betelgeuse is in the constellation Orion - and you can easily see it rise over Tucson at night. If you look carefully, you'll be able to tell it's a different color with just your own eyes.
+        </font>
+    </figcaption>
+</center>
+\end{verbatim}
+
+Remember, different stars also have different sizes. Compare the size of
+Betelgeuse to the Sun by scrolling from left to right on the image
+below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{display}\PY{p}{(}\PY{n}{Image}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{star\PYZus{}sizes\PYZus{}small.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{4000}\PY{p}{,} \PY{n}{unconfined}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+
+    \section{Activity 4: Looking at the Life Cycles of
+Stars}\label{activity-4-looking-at-the-life-cycles-of-stars}
+
+We've taken a look at different stellar spectra, and put them on context
+with each other with the Main Sequence. Stars may look like they are
+always the same to us, but they're always changing.
+
+As a star runs out of fuel, it is no longer able to withstand the force
+of gravity and begins to die. Stars die in several different ways. Some
+end their lives as white dwarfs, slowly cooling in space. The most
+massive stars end their lives as nuetron stars, and black holes. Many
+stars however, die by exploding spectacularly. These are supernovae!
+
+Use the \href{http://starinabox.lco.global/}{Star in a box} to see how
+stars with different masses live and die!
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
